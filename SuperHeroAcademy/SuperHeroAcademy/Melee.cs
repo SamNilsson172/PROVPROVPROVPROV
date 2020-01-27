@@ -6,12 +6,14 @@ namespace SuperHeroAcademy
 {
     class Melee : Hero
     {
+        int maxStamina;
         int stamina;
         string weapon;
 
         public Melee(int _stamina, string _weapon, int _hp, int _def, int _dmg, string _name) : base(_hp, _def, _dmg, _name)
         {
             stamina = _stamina;
+            maxStamina = _stamina;
             weapon = _weapon;
         }
 
@@ -30,6 +32,20 @@ namespace SuperHeroAcademy
             else
                 return 0;
 
+        }
+
+        public override void Heal()
+        {
+            base.Heal();
+            stamina = maxStamina;
+        }
+
+        public override void PrintStats()
+        {
+            base.PrintStats();
+            Console.WriteLine("Type: Melee");
+            Console.WriteLine("Stamina: " + stamina + "/" + maxStamina);
+            Console.WriteLine("Weapon: " + weapon);
         }
     }
 }

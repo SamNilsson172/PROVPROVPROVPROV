@@ -6,14 +6,16 @@ namespace SuperHeroAcademy
 {
     class Hero
     {
-        protected int hp;
-        public int def { get; private set; }
+        int maxHp;
+        int hp;
+        int def;
         int dmg;
         string name;
 
         public Hero(int _hp, int _def, int _dmg, string _name)
         {
             hp = _hp;
+            maxHp = _hp;
             def = _def;
             dmg = _dmg;
             name = _name;
@@ -21,11 +23,12 @@ namespace SuperHeroAcademy
 
         public static void Attack(Hero attacker, Hero defender)
         {
-            defender.hp = attacker.GetDmg() / defender.def;
+            defender.hp -= attacker.GetDmg() / defender.def;
         }
 
         public virtual void Practice()
         {
+            maxHp++;
             hp++;
             def++;
             dmg++;
@@ -36,12 +39,17 @@ namespace SuperHeroAcademy
             return dmg;
         }
 
-        public void PrintStats()
+        public virtual void Heal()
+        {
+            hp = maxHp;
+        }
+
+        public virtual void PrintStats()
         {
             Console.WriteLine(name);
-            Console.WriteLine(hp);
-            Console.WriteLine(def);
-            Console.WriteLine(dmg);
+            Console.WriteLine("Hp: " + hp + "/" + maxHp);
+            Console.WriteLine("Def: " + def);
+            Console.WriteLine("Dmg: " + dmg);
         }
     }
 }
